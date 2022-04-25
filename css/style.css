@@ -4,6 +4,11 @@
     box-sizing: border-box
 }
 
+@font-face {
+    font-family: Helvetica;
+    src: url(Helvetica\ Neue\ Medium\ Extended.ttf)
+}
+
 body {
     overflow-x: hidden;
 }
@@ -15,9 +20,11 @@ body {
     overflow: hidden;
 }
 
-/* nav { */
-/* padding: 39px 0; */
-/* } */
+#nav {
+    transition: all .3s ease;
+    width: 100%;
+    z-index: 100;
+}
 
 nav ul li a {
     color: #97b4b5 !important;
@@ -54,7 +61,7 @@ nav .button a:hover::after {
     transform: scale(1);
 }
 
-nav .button a:hover{
+nav .button a:hover {
     color: #fff;
 }
 
@@ -66,26 +73,38 @@ nav .button a:hover{
     width: 100%;
 }
 
-.header .carousel {
-    width: 40%;
+.header .carousel{
     position: absolute;
-    top: 50%;
-    right: 10%;
-    transform: translateY(-50%);
-    padding: .5rem;
+    bottom: 12%;
 }
 
-.header .carousel .item {
-    padding: 1rem 0 6rem;
+.header .carousel .item{
+    padding: 4rem 0;
+}
+
+.header .carousel .content{
+    width: 40%;
+    margin-bottom: 8rem
+}
+
+.header .carousel .pic{
+    position:absolute;
+    width: 40%;
+    bottom: 0%;
+    left: 15%;
+} 
+
+.header .carousel .item h1 {
+    font-weight: bold
 }
 
 .header .carousel .item h1,
-.header .carousel .item p {
+.header .carousel .item p{
     margin-bottom: 2rem;
     color: #fff;
 }
 
-.header .carousel a {
+.header .carousel a{
     text-decoration: none;
     border: 1px solid #fff;
     border-radius: 99px;
@@ -95,7 +114,7 @@ nav .button a:hover{
     font-weight: 500;
     margin-right: .5rem;
     position: relative;
-    overflow: hidden;
+    transition: all .2s linear;
 }
 
 .header .carousel a::after,
@@ -114,47 +133,19 @@ nav .button a::after {
     z-index: -1;
 }
 
+.header .carousel a:hover{
+    border: 1px solid #ec7a00;
+}
+
 .header .carousel a:hover::after {
     transform: scale(1);
 }
 
-.header .pic {
+.header .owl-nav{
     position: absolute;
-    width: 600px;
-    animation: header 3s linear;
-    animation-iteration-count: infinite;
-}
-
-@keyframes header {
-    0% {
-        bottom: 15%;
-        left: 5%;
-    }
-    20% {
-        bottom: 17%;
-        left: 5%;
-    }
-    40% {
-        bottom: 19%;
-        left: 5%;
-    }
-    60% {
-        bottom: 20%;
-        left: 5%;
-    }
-    80% {
-        bottom: 17%;
-        left: 5%;
-    }
-    100% {
-        bottom: 15%;
-        left: 5%;
-    }
-}
-
-.header .owl-nav {
+    bottom: 20%;
+    right: 0%;
     display: flex;
-    justify-content: flex-start;
     font-size: 1.5rem;
 }
 
@@ -169,15 +160,47 @@ nav .button a::after {
     align-items: center !important;
     justify-content: center !important;
 }
-
-.header .owl-next span,
-.header .owl-prev span {
-    font-size: 2rem;
-}
-
 /******************************** Video ***************************************/
 #video {
     margin: 75px 0;
+    position: relative;
+}
+
+#video .layer{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.726);
+    z-index: 998;
+}
+
+#video .layer .video{
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#video #theVideo {
+    width:100%;
+    z-index: 999;
+}
+
+#video span .close{
+    color: #fff;
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 999
+}
+
+#video .hidden {
+    display: none;
 }
 
 #video .content h3 {
@@ -195,14 +218,14 @@ nav .button a::after {
     text-decoration: none;
     color: #306a6c;
     border-radius: 99px;
-    box-shadow: 0px 0px 5px 6px #dbe5e9;
+    box-shadow: 0 0 4px 0 #dbe5e9;
     padding: .5rem 1.2rem;
     font-weight: 500;
     transition: all .3s linear;
 }
 
 #video .content a:hover {
-    box-shadow: 0px 0px 10px 10px #dbe5e9;
+    box-shadow: 0px 0px 6px 4px #dbe5e9;
 }
 
 #video .content a img {
@@ -215,7 +238,7 @@ nav .button a::after {
     background-color: #306a6c;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0px 0px 40px 40px #dbe5e9;
+    box-shadow: 0px 0px 40px 40px #f8f8f8;
     position: relative;
 }
 
@@ -226,29 +249,34 @@ nav .button a::after {
     transform: translate(-50%, -50%);
     border: 20px solid #fff;
     border-radius: 50%;
-    cursor: pointer; 
+    cursor: pointer;
     animation: video 1.2s ease-in-out;
     animation-iteration-count: infinite;
 }
 
-@keyframes video{
-    0%{
+@keyframes video {
+    0% {
         outline: 4px solid #80a1a2a1;
     }
-    20%{
+
+    20% {
         outline: 8px solid #80a1a2a1;
     }
-    40%{
+
+    40% {
         outline: 12px solid #80a1a2a1;
     }
-    60%{
+
+    60% {
         outline: 16px solid #80a1a2a1;
     }
-    80%{
+
+    80% {
         outline: 20px solid #80a1a270;
-        
+
     }
-    100%{
+
+    100% {
         outline: 24px solid #80a1a22c;
     }
 }
@@ -278,34 +306,29 @@ nav .button a::after {
 }
 
 #video .item p {
-    font-size: 1.5rem;
-    font-weight: 500;
+    font-size: 22px;
+    font-weight: 400;
 }
 
 /******************************** لماذا مداد كلاود لإدارة المحتوى ؟ ***************************************/
 #why {
-    background-image: linear-gradient(to right, #ec7a00ee, #ec7a00 90%);
+    /* background-image: linear-gradient(to right, #ec7a00ee, #ec7a00 90%); */
     height: max-content;
     position: relative;
     padding: 75px 0;
 }
 
-#why .image {
+#why::before {
+    content: '';
     position: absolute;
-    left: 0;
-    top: 0;
-    right: 60%;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background: linear-gradient(to right, #ec7a00ee, #ec7a00 90%), url(../images/logo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     z-index: -1;
-    overflow: hidden;
-    height: 100%;
-}
-
-#why .image img {
-    width: 150%;
-    height: 100%;
-    opacity: .5;
-    color: #fff;
-    filter: brightness(2)
 }
 
 #why .pic {
@@ -321,7 +344,7 @@ nav .button a::after {
 }
 
 #why h3 {
-    margin-bottom: 75px;
+    margin-bottom: 40px;
 }
 
 #why li,
@@ -363,6 +386,8 @@ nav .button a::after {
 #services .item p {
     font-weight: 500;
     margin-bottom: 2rem;
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
 }
 
 #services .item a {
@@ -399,7 +424,6 @@ nav .button a::after {
 .owl-theme .owl-dots .owl-dot span {
     width: 0;
 }
-
 /******************************** خصائص المشروع ***************************************/
 #properties {
     background: linear-gradient(to right, #306a6c, #25585a8e 90%), url(../images/propertes.jpg);
@@ -413,7 +437,8 @@ nav .button a::after {
 }
 
 #properties .head h3,
-#properties .head p {
+#properties .head p,
+#properties .item p {
     color: #fff;
 }
 
@@ -435,13 +460,20 @@ nav .button a::after {
     transition: all .3s linear;
 }
 
-#properties .item:hover{
+#properties .item:hover {
     border: 1px solid #ec7900;
     transform: scale(.99);
 }
 
 #properties .item .pic {
+    width: 4.5rem;
+    height: 4.5rem;
+    margin: auto;
     margin-bottom: 2rem;
+}
+
+#properties .item .pic img{
+    width:100%
 }
 
 /******************************** الأسئلة الشائعة ***************************************/
@@ -547,7 +579,6 @@ nav .button a::after {
     left: 50%;
     transform: translateX(-50%);
 }
-
 /******************************** تواصل معنا ***************************************/
 #contact {
     padding-bottom: 4.5rem;
@@ -594,10 +625,10 @@ nav .button a::after {
 }
 
 #contact .item input,
-#contact .item textarea {
+#contact .item textarea{
     border: none;
     width: 75%;
-    box-shadow: 0 0 4px 0px #306a6c;
+    border: .5px solid #306a6c;
 }
 
 #contact .item textarea {
@@ -613,7 +644,7 @@ nav .button a::after {
 
 #contact .item input:focus,
 #contact .item textarea:focus {
-    box-shadow: 0 0 6px 1px #306a6c;
+    box-shadow: 0 0 4px 1px #306a6c;
     outline: none;
 }
 
@@ -631,7 +662,6 @@ nav .button a::after {
     border-radius: 99px;
     border: none;
 }
-
 /******************************** footer ***************************************/
 #footer {
     background: linear-gradient(to right, #306a6ce7 50%, #a3742de5);
@@ -651,10 +681,10 @@ nav .button a::after {
 }
 
 #footer .row {
-    --bs-gutter-x:0 !important
+    --bs-gutter-x: 0 !important
 }
 
-#footer .content .info .icon{
+#footer .content .info .icon {
     margin-left: .5rem;
 }
 
@@ -669,10 +699,6 @@ nav .button a::after {
     cursor: pointer;
     margin: 0;
 }
-
-/* #footer .col-lg-2{ */
-    /* text-align: -webkit-center; */
-/* } */
 
 #footer .content p {
     color: #fff;
@@ -760,7 +786,7 @@ nav .button a::after {
         width: 85%;
     }
 
-    .header .carousel {
+    /* .header .carousel {
         width: 60%;
         position: absolute;
         top: 45%;
@@ -771,26 +797,60 @@ nav .button a::after {
 
     .header .carousel .item h1 {
         font-size: 2rem;
-    }
+    } */
 
-    .header .pic {
-        position: absolute;
-        width: 500px;
-        bottom: 15% !important;
-        left: -10% !important;
-    }
+    /* .header .pic { */
+        /* position: absolute; */
+        /* width: 500px; */
+        /* bottom: 15% !important; */
+        /* left: -10% !important; */
+    /* } */
 
-    .header .pic img {
+    /* .header .pic img {
         width: 85% !important;
+    } */
+    .header .carousel{
+        top: 10%;
+        width: 100%;
+        height: 100%;
+    }
+    
+    .header .carousel .item{
+        padding:  1rem 0;
+    }
+    
+    .header .carousel .content{
+        width: 60%;
+        margin-bottom: 1rem
+    }    
+    
+    .header .carousel .item h1 {
+        font-size: 1.5rem
+    }
+    .header .carousel .item p {
+        font-size: 1rem
+    }
+    
+    .header .owl-nav{
+        bottom: 35%;
+        font-size: 1rem;
+    }
+    
+    .header .owl-next,
+    .header .owl-prev {
+        width: 25px;
+        height: 25px;
     }
 
     #video .upper {
         flex-direction: column;
-
     }
 
     #video .content {
         margin-bottom: 5rem;
+    }
+    #video .items .item{
+        margin-bottom: 2rem;
     }
 
     #why .pic {
@@ -843,20 +903,25 @@ nav .button a::after {
         width: 85%;
     }
 
-    .header .carousel {
-        top: 50%;
-        width: 60%;
-    }
-
-    .header .pic {
+    .header .carousel{
         position: absolute;
-        width: 500px;
-        bottom: 15% !important;
-        left: -10% !important;
+        bottom: 12%;
     }
-
-    .header .pic img {
-        width: 85% !important;
+    
+    .header .carousel .item{
+        padding: 2rem 0;
+    }
+    
+    .header .carousel .content{
+        width: 60%;
+        margin-bottom: 8rem
+    }
+    
+    .header .carousel .pic{
+        position:absolute;
+        width: 60%;
+        bottom: 0%;
+        left: 10%;
     }
 
     #video .image {
@@ -874,5 +939,29 @@ nav .button a::after {
 
     #footer .content .info {
         margin-bottom: 1rem;
+    }
+}
+
+@media (max-width: 1200px){
+    .header .container{
+        max-width: 90%;
+    }
+    .header .carousel{
+        position: absolute;
+        bottom: 12%;
+    }
+
+    .header .carousel .content{
+        width: 50%;
+        margin-bottom: 6rem
+    }
+    
+    .header .carousel .pic{
+        width: 60%;
+        left: 0%;
+    }
+
+    .header .carousel .pic img{
+        width: 80% !important
     }
 }
